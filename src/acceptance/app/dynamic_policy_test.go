@@ -187,6 +187,7 @@ var _ = Describe("AutoScaler dynamic policy", func() {
 							return
 						case <-ticker.C:
 							Eventually(func() string {
+								fmt.Println("*******************curl")
 								return helpers.CurlAppWithTimeout(cfg, appName, "/slow/10000", 1*time.Minute)
 							}, 1*time.Minute, 2*time.Second).Should(ContainSubstring("dummy application with slow response"))
 						}
@@ -218,6 +219,7 @@ var _ = Describe("AutoScaler dynamic policy", func() {
 							return
 						case <-ticker.C:
 							Eventually(func() string {
+								fmt.Println("*******************curl")
 								return helpers.CurlAppWithTimeout(cfg, appName, "/fast", 10*time.Second)
 							}, 10*time.Second, 1*time.Second).Should(ContainSubstring("dummy application with fast response"))
 						}
@@ -268,6 +270,7 @@ var _ = Describe("AutoScaler dynamic policy", func() {
 							return
 						case <-ticker.C:
 							Eventually(func() string {
+								fmt.Println("*******************curl")
 								return helpers.CurlAppWithTimeout(cfg, appName, "/fast", 10*time.Second)
 							}, 10*time.Second, 25*time.Millisecond).Should(ContainSubstring("dummy application with fast response"))
 						}
@@ -300,6 +303,7 @@ var _ = Describe("AutoScaler dynamic policy", func() {
 							return
 						case <-ticker.C:
 							Eventually(func() string {
+								fmt.Println("*******************curl")
 								return helpers.CurlAppWithTimeout(cfg, appName, "/fast", 10*time.Second)
 							}, 10*time.Second, 1*time.Second).Should(ContainSubstring("dummy application with fast response"))
 						}
