@@ -3,13 +3,13 @@ package app
 import (
 	"acceptance/config"
 
+	"fmt"
 	"github.com/cloudfoundry-incubator/cf-test-helpers/cf"
 	"github.com/cloudfoundry-incubator/cf-test-helpers/generator"
 	"github.com/cloudfoundry-incubator/cf-test-helpers/helpers"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	. "github.com/onsi/gomega/gexec"
-
 	"strconv"
 	"strings"
 	"time"
@@ -161,9 +161,12 @@ var _ = Describe("AutoScaler dynamic policy", func() {
 		})
 
 		AfterEach(func() {
+			fmt.Println("=================>before close channel scaling by responsetime")
 			doneChan <- true
+			fmt.Println("=================>after close channel scaling by responsetime")
 			unbindService := cf.Cf("unbind-service", appName, instanceName).Wait(cfg.DefaultTimeoutDuration())
 			Expect(unbindService).To(Exit(0), "failed unbinding service from app")
+			fmt.Println("=================>after unbind scaling by responsetime")
 		})
 
 		Context("when responsetime is greater than scaling out threshold", func() {
@@ -239,9 +242,12 @@ var _ = Describe("AutoScaler dynamic policy", func() {
 		})
 
 		AfterEach(func() {
+			fmt.Println("=================>before close channel scaling by throughput")
 			doneChan <- true
+			fmt.Println("=================>after close channel scaling by throughput")
 			unbindService := cf.Cf("unbind-service", appName, instanceName).Wait(cfg.DefaultTimeoutDuration())
 			Expect(unbindService).To(Exit(0), "failed unbinding service from app")
+			fmt.Println("=================>after unbind scaling by throughput")
 		})
 
 		Context("when throughput is greater than scaling out threshold", func() {
