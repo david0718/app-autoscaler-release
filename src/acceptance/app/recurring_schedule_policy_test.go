@@ -76,7 +76,7 @@ var _ = Describe("AutoScaler recurring schedule policy", func() {
 
 			It("should scale", func() {
 				By("setting to initial_min_instance_count")
-				jobRunTime := startTime.Add(1 * time.Minute).Sub(time.Now())
+				jobRunTime := startTime.Add(3 * time.Minute).Sub(time.Now())
 				waitForNInstancesRunning(appGUID, 3, jobRunTime)
 
 				By("setting schedule's instance_min_count")
@@ -103,7 +103,7 @@ var _ = Describe("AutoScaler recurring schedule policy", func() {
 
 			It("should scale", func() {
 				By("setting to initial_min_instance_count")
-				jobRunTime := startTime.Add(1 * time.Minute).Sub(time.Now())
+				jobRunTime := startTime.Add(3 * time.Minute).Sub(time.Now())
 				waitForNInstancesRunning(appGUID, 3, jobRunTime)
 
 				By("setting schedule's instance_min_count")
