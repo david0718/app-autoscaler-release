@@ -14,7 +14,7 @@ api_server_properties:
     idle_timeout: 1000
     max_connections: 10
     min_connections: 0
-  uri: autoscaler.bosh-lite.com
+  uri: autoscaler.YOUR_DOMAIN_HERE
   port: 6100
   publicPort: 6106
   ca_cert: (( grab app_autoscaler_ca_cert ))
@@ -50,7 +50,7 @@ service_broker_properties:
   password: password
   http_request_timeout: 5000
   dashboard_redirect_uri: ""
-  catalog: 
+  catalog:
     services:
     - id: autoscaler-guid
       name: autoscaler

@@ -2,7 +2,7 @@
 deployment_name: app-autoscaler
 
 default_db:
-  address: 192.168.243.203
+  address: YOUR_STATIC_IP_ADDRESS
   databases:
     - {name: autoscaler, tag: default}
   db_scheme: postgres
@@ -15,7 +15,7 @@ api_server_properties:
     idle_timeout: 1000
     max_connections: 10
     min_connections: 0
-  uri: autoscaler.ops.icp.net
+  uri: (( concat "autoscaler." bmxconfig.bluemix_env_domain ))
   port: 6100
   publicPort: 6106
   ca_cert: (( grab app_autoscaler_ca_cert ))
@@ -42,7 +42,7 @@ service_broker_properties:
     idle_timeout: 1000
     max_connections: 10
     min_connections: 0
-  uri: autoscalerservicebroker.ops.icp.net
+  uri: (( concat "autoscalerservicebroker." bmxconfig.bluemix_env_domain ))
   port : 80
   ca_cert: (( grab app_autoscaler_ca_cert ))
   server_cert: (( grab servicebroker_server_cert ))
@@ -51,7 +51,7 @@ service_broker_properties:
   password: password
   http_request_timeout: 5000
   dashboard_redirect_uri: ""
-  catalog: 
+  catalog:
     services:
     - id: autoscaler-guid
       name: autoscaler
@@ -80,7 +80,7 @@ scheduler_properties:
     client_key: (( grab scalingengine_client_key ))
 
 cf_properties:
-  api: https://api.ops.icp.net
+  api: (( concat "https://api." bmxconfig.bluemix_env_domain ))
   grant_type: password
   username: (( grab bmxconfig.main_user_name ))
   password: (( grab bmxconfig.main_user_password ))
