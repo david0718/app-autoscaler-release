@@ -44,10 +44,15 @@ states:
 - name: Upload Release
   phase: "Uploading a release for App Autoscaler"
   script: bosh2 upload-release -e IBMCloudPrivate -d app-autoscaler
+- name: Upload Postgres Release
+  phase: "Uploading Postgres release"
+  script: bosh2 upload-release -e IBMCloudPrivate -d app-autoscaler ./postgres_17.tgz
+- name: Upload Cloud Foundry Routing Release
+  phase: "Uploading cf-routing-release"
+  script: bosh2 upload-release -e IBMCloudPrivate -d app-autoscaler ./cf-routing-release.tgz
 - name: Generate deployment yaml
   phase: "Generating the deployment yaml"
   script: ./scripts/generate-bosh-lite-manifest -r ./manifests/cf-merge-property-overrides.yaml  -p ./manifests/property-overrides.yaml  -d ./manifests/db-stub-override.yaml -v v1
 - name: Deploy App Autoscaler
   phase: "Deploying App Autoscaler"
   script: bosh2 deploy -e IBMCloudPrivate -d app-autoscaler ./bosh/deployments/autoscaler.yml -n
-

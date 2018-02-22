@@ -1,4 +1,4 @@
---- 
+---
 
 name: (( grab deployment_name ))
 
@@ -7,17 +7,13 @@ releases:
 - name: app-autoscaler
   version: latest
 - name: postgres
-  url: file:///repo_local/postgres-release/v17/postgres-release-17.tgz
   version: "17"
 - name: routing
-  url: file:///repo_local/cf-routing-release/v0.162.0/cf-routing-release-0.162.0.tgz
   version: 0.162.0
-- location: file:///repo_local/cfp-cf-release/253.36.0/253.36.0-ibm-cf.tgz 
-  name: cf-235031 
-  version: ibm-v235.31
-- location: file:///repo_local/cfp-unbound/v0.2-15/unbound-v0.2-15.tgz
-  name: unbound
-  version: v0.2-4
+- name: ibm-cf
+  version: latest
+- name: unbound
+  version: latest
 
 ## Network Section ##
 networks:
@@ -67,7 +63,7 @@ jobs:
       - dns
       - gateway
       name: default
-      static_ips: 
+      static_ips:
         - (( grab default_db.address))
     templates:
       - name: consul_agent
@@ -88,7 +84,7 @@ jobs:
                 tcp: 127.0.0.1:5432
                 interval: 30s
                 timeout: 10s
-  
+
   - name: apiserver
     instances: 1
     networks:
@@ -157,7 +153,7 @@ jobs:
     resource_pool: (( grab resource_pool ))
     templates:
       - name: consul_agent
-        release: (( grab meta.cf_release_name )) 
+        release: (( grab meta.cf_release_name ))
         consumes: {consul_client: nil, consul_server: nil, consul_common: nil}
       - name: servicebroker
         release: app-autoscaler
