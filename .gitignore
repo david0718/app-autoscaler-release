@@ -22,3 +22,5 @@ src/github.com/codegangsta/cli
 bosh-lite/deployments/*
 app-autoscaler-extension.zip
 bosh
+cf-routing-release.tgz
+postgres_17.tgz
